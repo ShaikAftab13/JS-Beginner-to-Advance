@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script src="script.js"></script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Stock Manager</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #4e73df, #1cc88a);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .card {
+            background: white;
+            padding: 25px;
+            width: 320px;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            text-align: center;
+        }
+
+        h2 {
+            margin-bottom: 5px;
+        }
+
+        .price {
+            color: gray;
+            margin-bottom: 15px;
+        }
+
+        input {
+            width: 80%;
+            padding: 8px;
+            margin: 8px 0;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+        }
+
+        button {
+            padding: 8px 15px;
+            margin: 5px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            color: white;
+        }
+
+        .buy {
+            background: #e74a3b;
+        }
+
+        .refill {
+            background: #1cc88a;
+        }
+
+        .stock {
+            margin-top: 15px;
+            font-weight: bold;
+        }
+
+        .message {
+            margin-top: 10px;
+            font-size: 14px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="card">
+        <h2 id="productName"></h2>
+        <div class="price" id="productPrice"></div>
+
+        <div class="stock" id="stockDisplay"></div>
+
+        <input type="number" id="qtyInput" placeholder="Enter quantity">
+
+        <br>
+        <button class="buy" onclick="buyProduct()">Buy</button>
+        <button class="refill" onclick="refillProduct()">Refill</button>
+
+        <div class="message" id="message"></div>
+    </div>
+
+    <script>
+        function createProduct(name, price) {
+            let stock = 10;
+
+            return {
+                name,
+                price,
+
+                getStock() {
+                    return stock;
+                },
+
+                buy(qty) {
+                    if (qty <= stock) {
+                        stock -= qty;
+                        return `${qty} booked - ${stock} left`;
+                    } else {
+                        return `Only ${stock} left.`;
+                    }
+                },
+
+                refill(qty) {
+                    stock += qty;
+                    return `Stock refilled. Available: ${stock}`;
+                }
+            };
+        }
+
+        let sharbat = createProduct("Nanari Sharbat", 30);
+
+        // UI Elements
+        const nameEl = document.getElementById("productName");
+        const priceEl = document.getElementById("productPrice");
+        const stockEl = document.getElementById("stockDisplay");
+        const messageEl = document.getElementById("message");
+
+        nameEl.textContent = sharbat.name;
+        priceEl.textContent = "Price: ₹" + sharbat.price;
+        updateStock();
+
+        function updateStock() {
+            stockEl.textContent = "Available Stock: " + sharbat.getStock();
+        }
+
+        function buyProduct() {
+            const qty = Number(document.getElementById("qtyInput").value);
+            if (!qty) return;
+
+            messageEl.textContent = sharbat.buy(qty);
+            updateStock();
+        }
+
+        function refillProduct() {
+            const qty = Number(document.getElementById("qtyInput").value);
+            if (!qty) return;
+
+            messageEl.textContent = sharbat.refill(qty);
+            updateStock();
+        }
+    </script>
+
+</body>
+
+</html> -->

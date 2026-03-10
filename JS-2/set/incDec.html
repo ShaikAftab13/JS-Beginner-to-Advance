@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            overflow: hidden;
+        }
+
+        .buttons {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            height: 100vh;
+        }
+
+        .btn-row {
+            display: flex;
+            gap: 10px;
+        }
+
+        button {
+            padding: 5px 15px;
+            border: none;
+            background: linear-gradient(to right, violet, purple);
+            color: azure;
+            border-radius: 20px;
+            cursor: pointer;
+        }
+
+        .design {
+            color: crimson;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="buttons">
+        <div class="btn-row">
+            <button id="inc">Increment</button>
+            <button id="dec">Decrement</button>
+        </div>
+    </div>
+    <script>
+        let count = 0;
+        let inc = document.querySelector("#inc");
+        let dec = document.querySelector("#dec");
+        let displayCount = document.createElement("h1");
+        let btn = document.querySelector(".buttons");
+        btn.prepend(displayCount);
+        displayCount.classList.add("design");
+
+        inc.addEventListener("click", () => {
+            displayCount.textContent = ++count;
+        })
+
+        dec.addEventListener("click", () => {
+            if (count > 0) displayCount.textContent = --count;
+        })
+    </script>
+</body>
+
+</html>

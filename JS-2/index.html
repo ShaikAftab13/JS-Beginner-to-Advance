@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>COUNT</h1>
+    <div class="buttons">
+        <button id="inc">INCREMENT</button>
+        <button id="dec">DECREMENT</button>
+    </div>
+    <script>
+        let buttons = document.querySelector(".buttons");
+        let inc = document.querySelector("#inc");
+        let dec = document.querySelector("#dec");
+        let count = 0;
+        let h1 = document.createElement("h1");
+        inc.addEventListener("click", () => {
+            count++;
+            h1.textContent = `Count is : ${count}`;
+        })
+        dec.addEventListener("click", () => {
+            count--;
+            h1.textContent = `Count is : ${count}`;
+        })
+        buttons.append(h1);
+    </script>
+</body>
+
+</html>

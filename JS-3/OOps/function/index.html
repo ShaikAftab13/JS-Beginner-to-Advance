@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .display {
+            margin: 40px auto;
+            min-height: 250px;
+            min-width: 300px;
+            max-width: 350px;
+            padding: 25px;
+
+            border-radius: 20px;
+
+            background: linear-gradient(135deg, #a8edea, #fed6e3);
+
+            box-shadow:
+                0 10px 25px rgba(0, 0, 0, 0.15),
+                inset 0 0 10px rgba(255, 255, 255, 0.4);
+
+            backdrop-filter: blur(10px);
+
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 10px;
+
+            text-align: center;
+
+            transition: all 0.3s ease;
+        }
+
+        .display:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow:
+                0 15px 35px rgba(0, 0, 0, 0.25),
+                0 0 20px rgba(255, 255, 255, 0.6);
+        }
+
+        .display h2 {
+            font-size: 24px;
+            color: #222;
+            font-weight: bold;
+        }
+
+        .display h3 {
+            color: #333;
+        }
+
+        .display h4 {
+            color: #444;
+        }
+
+        .display p {
+            font-style: italic;
+            color: #555;
+        }
+    </style>
+</head>
+
+<body>
+    <script src="script.js"></script>
+</body>
+
+</html>

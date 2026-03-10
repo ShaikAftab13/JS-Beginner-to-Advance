@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Theme Practice</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            transition: background 0.3s ease, color 0.3s ease;
+        }
+
+        /* Light Theme */
+        body.light {
+            background-color: #ffffff;
+            color: #222;
+        }
+
+        /* Dark Theme */
+        body.dark {
+            background-color: #1e1e1e;
+            color: #ffffff;
+        }
+
+        .container {
+            text-align: center;
+            margin-top: 100px;
+        }
+
+        .theme-btn {
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            background: #4CAF50;
+            color: white;
+            transition: 0.3s;
+        }
+
+        .theme-btn:hover {
+            opacity: 0.8;
+        }
+    </style>
+</head>
+
+<body class="light">
+
+    <div class="container">
+        <h1>Theme Practice</h1>
+        <p>Click button to change theme</p>
+        <button class="theme-btn" id="themeToggle">Toggle Theme</button>
+    </div>
+
+    <script>
+        let btn = document.querySelector("#themeToggle");
+        if(localStorage.getItem("theme")) {
+            document.body.classList.add(localStorage.getItem("theme"));
+        } else {
+            setDarkorLight();
+        }
+
+
+        function setDarkorLight() {
+            if (window.matchMedia('(prefers-color-scheme:dark)').matches) {
+                document.body.classList.add("dark");
+                document.body.classList.remove("light");
+            } else {
+                document.body.classList.add("light");
+                document.body.classList.remove("dark");
+            }
+        }
+        window.matchMedia('(prefers-color-scheme:dark)').addEventListener("change",()=>{
+            setDarkorLight();
+        });
+
+        btn.addEventListener("click", () => {
+            if (document.body.classList.contains("dark")) {
+                document.body.classList.remove("dark");
+                document.body.classList.add("light");
+                localStorage.setItem("theme", "light");
+            } else {
+                document.body.classList.remove("light");
+                document.body.classList.add("dark");
+                localStorage.setItem("theme", "dark");
+            }
+        });
+
+    </script>
+
+</body>
+
+</html>

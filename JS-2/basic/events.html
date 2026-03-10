@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            height: 100%;
+            width: 100%;
+        }
+
+        form {
+            padding: 20px;
+        }
+
+        small {
+            color: red;
+            font-size: 12px;
+        }
+
+        .hide {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <form>
+        <input required id="name" type="text" placeholder="Enter name">
+        <div class="hide">
+            <br>
+            <small>Your name should be greater than 2 characters</small>
+        </div>
+        <br><br>
+        <input id="email" type="email" placeholder="Enter email">
+        <div class="hide">
+            <br>
+            <small>Your email is incorrect.Try adding "@" and "."</small>
+        </div>
+        <br><br>
+        <input type="password" placeholder="Enter password">
+        <br><br>
+        <select>
+            <option selected disabled>Select Gender</option>
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+            <option value="Others">Others</option>
+        </select>
+        <br><br>
+        <textarea placeholder="Tell us about you"></textarea>
+        <br><br>
+        <input type="submit">
+    </form>
+    <script src="events.js"></script>
+</body>
+
+</html>

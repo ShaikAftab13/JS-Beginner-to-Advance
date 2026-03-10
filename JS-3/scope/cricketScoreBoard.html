@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#0f172a">
+    <title>Cricket Scoreboard</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #0f172a;
+            padding: 20px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 500px;
+            background: #1e293b;
+            border-radius: 20px;
+            padding: clamp(20px, 4vw, 40px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+            position: relative;
+        }
+
+        .title {
+            text-align: center;
+            font-size: clamp(18px, 3vw, 26px);
+            color: #94a3b8;
+            letter-spacing: 1px;
+        }
+
+        .stats {
+            display: flex;
+            justify-content: space-between;
+            padding: clamp(12px, 3vw, 20px);
+            background: #0f172a;
+            border-radius: 12px;
+        }
+
+        .stat-box {
+            text-align: center;
+            flex: 1;
+        }
+
+        .stat-box h2 {
+            font-size: clamp(12px, 2vw, 16px);
+            color: #94a3b8;
+            margin-bottom: 6px;
+        }
+
+        .value {
+            font-size: clamp(24px, 5vw, 34px);
+            font-weight: bold;
+            color: #f8fafc;
+        }
+
+        .buttons {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: clamp(10px, 2vw, 16px);
+        }
+
+        button {
+            padding: clamp(12px, 2.5vw, 18px);
+            border: none;
+            border-radius: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            background: #334155;
+            color: white;
+            transition: 0.2s;
+            font-size: clamp(14px, 2vw, 18px);
+        }
+
+        button:hover {
+            background: #475569;
+        }
+
+        button:active {
+            transform: scale(0.95);
+        }
+
+        #refresh {
+            background: #2563eb;
+        }
+
+        #refresh:hover {
+            background: #1d4ed8;
+        }
+
+        .popup {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 10px;
+            flex-wrap: wrap;
+        }
+
+        .popup button {
+            width: 50px;
+            background: #0f172a;
+        }
+
+        .popup button:hover {
+            background: #2563eb;
+        }
+
+        .out-message {
+            position: absolute;
+            bottom: -35px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #dc2626;
+            color: white;
+            padding: 6px 15px;
+            border-radius: 20px;
+            font-size: 14px;
+            animation: fade 0.3s ease;
+        }
+
+        @keyframes fade {
+            from {
+                opacity: 0;
+                transform: translate(-50%, 10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translate(-50%, 0);
+            }
+        }
+
+        @media (max-width: 360px) {
+            .buttons {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+
+        <div class="title">CRICKET SCOREBOARD</div>
+
+        <div class="stats">
+            <div class="stat-box">
+                <h2>SCORE</h2>
+                <div id="score" class="value">0</div>
+            </div>
+
+            <div class="stat-box">
+                <h2>BALLS</h2>
+                <div id="balls" class="value">0</div>
+            </div>
+        </div>
+
+        <div class="buttons">
+            <button>OUT</button>
+            <button>Runs</button>
+            <button>4</button>
+            <button>6</button>
+        </div>
+
+        <button id="refresh">RESET MATCH</button>
+
+    </div>
+
+    <script>
+        let score = 0;
+        let ballsPlayed = 0;
+        let out = false;
+
+        const scoreDisplay = document.querySelector("#score");
+        const ballsDisplay = document.querySelector("#balls");
+        const buttons = document.querySelectorAll(".buttons button");
+        const container = document.querySelector(".container");
+        const refreshBtn = document.querySelector("#refresh");
+
+        let saveData = () => {
+            localStorage.setItem("Score", score)
+            localStorage.setItem("ballsPlayed", ballsPlayed);
+        }
+
+        let getData = () => {
+            let SavedScore = localStorage.getItem("Score");
+            let savedBallsPlayed = localStorage.getItem("ballsPlayed");
+            if (SavedScore !== null) {
+                score = Number(SavedScore);
+                scoreDisplay.textContent = score;
+            }
+            if (savedBallsPlayed !== null) {
+                ballsPlayed = Number(savedBallsPlayed);
+                ballsDisplay.textContent = ballsPlayed;
+            }
+        }
+
+        getData();
+
+        buttons.forEach(btn => {
+            btn.addEventListener("click", () => {
+
+                document.querySelector(".popup")?.remove();
+
+                if (btn.textContent === "OUT" && !out) {
+                    ballsPlayed++;
+                    ballsDisplay.textContent = ballsPlayed;
+                    out = true;
+
+                    let msg = document.createElement("div");
+                    msg.classList.add("out-message");
+                    msg.textContent = "Batsman OUT!";
+                    container.append(msg);
+                    saveData();
+                    return;
+                }
+
+                if (!out) {
+
+                    if (btn.textContent === "Runs") {
+                        let popup = document.createElement("div");
+                        popup.classList.add("popup");
+
+                        [0, 1, 2, 3].forEach(run => {
+                            let runBtn = document.createElement("button");
+                            runBtn.textContent = run;
+
+                            runBtn.addEventListener("click", () => {
+                                ballsPlayed++;
+                                score += run;
+
+                                scoreDisplay.textContent = score;
+                                ballsDisplay.textContent = ballsPlayed;
+
+                                popup.remove();
+                                saveData();
+                            });
+
+                            popup.append(runBtn);
+                        });
+
+                        container.append(popup);
+                        return;
+                    }
+
+                    ballsPlayed++;
+                    score += Number(btn.textContent);
+
+                    scoreDisplay.textContent = score;
+                    ballsDisplay.textContent = ballsPlayed;
+
+                    saveData();
+                }
+
+            });
+        });
+
+        refreshBtn.addEventListener("click", () => {
+            score = 0;
+            ballsPlayed = 0;
+            out = false;
+
+            scoreDisplay.textContent = 0;
+            ballsDisplay.textContent = 0;
+
+            document.querySelector(".popup")?.remove();
+            document.querySelector(".out-message")?.remove();
+            saveData();
+        });
+
+    </script>
+
+</body>
+
+</html>

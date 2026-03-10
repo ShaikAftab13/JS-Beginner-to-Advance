@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mini Project</title>
+    <style>
+        body {
+            background-color: #222;
+        }
+
+        #main form {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+        }
+
+        input[type="submit"] {
+            background-color: aliceblue;
+            color: navy;
+            padding: 5px 15px;
+            border: none;
+            cursor: pointer;
+            border-radius: 20px;
+        }
+
+        .row {
+            display: flex;
+            gap: 10px;
+        }
+
+        label {
+            width: 90px;
+            color: blanchedalmond;
+        }
+
+        input[type="text"] {
+            padding:5px;
+            border-radius: 10px;
+            border: none;
+            outline: none;
+        }
+
+        input[type="text"]::placeholder {
+            color: blueviolet;
+        }
+
+        .main-card {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .card {
+            padding: 20px;
+            width: 300px;
+            margin: 20px auto;
+            border: 2px solid #e3e3e3;
+            border-radius: 20px;
+            background: linear-gradient(to right,#444,#333);
+        }
+
+        .profile {
+            border: 2px solid black;
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            overflow: hidden;
+        }
+
+        .profile img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .card h3 {
+            font-size: 30px;
+            font-weight: bold;
+            color: white;
+            font-family: Arial, Helvetica, sans-serif;
+            margin: 10px 0 5px;
+        }
+
+        .card h5 {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-size: 18px;
+            color: crimson;
+            font-weight: 900;
+            margin: 5px 0 8px;
+        }
+
+        .card p {
+            color: #999;
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+            margin: 0;
+            line-height: 1.4;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="main">
+        <form action="">
+                <div class="row">
+                    <label>Profile:</label>
+                    <input type="text" placeholder="Profile url">
+                </div>
+
+                <div class="row">
+                    <label>Name:</label>
+                    <input type="text" placeholder="Name">
+                </div>
+
+                <div class="row">
+                    <label>Profession:</label>
+                    <input type="text" placeholder="Profession">
+                </div>
+
+                <div class="row">
+                    <label>Info:</label>
+                    <input type="text" placeholder="Info">
+                </div>
+
+                <input type="submit">
+
+                <div class="main-card"></div>
+        </form>
+    </div>
+
+    <script>
+        let form = document.querySelector("form");
+        let inputs = document.querySelectorAll("input");
+        let main = document.querySelector("#main");
+        let mainCard = document.querySelector(".main-card");
+
+        form.addEventListener("submit",(e)=>{
+            e.preventDefault();
+            console.log("Form not submitted");
+
+            let card = document.createElement("div");
+            card.classList.add("card");
+
+            let profile = document.createElement("div");
+            profile.classList.add("profile");
+
+            let img = document.createElement("img");
+            img.setAttribute("src",inputs[0].value);
+
+            let hr = document.createElement("hr");
+
+            let h3 = document.createElement("h3");
+            h3.textContent = inputs[1].value;
+
+            let h5 = document.createElement("h5");
+            h5.textContent = inputs[2].value;
+
+            let p = document.createElement("p");
+            p.textContent = inputs[3].value;
+
+            profile.append(img);
+            card.append(profile,hr,h3,h5,p);
+            mainCard.append(card)
+            main.append(mainCard);
+
+            inputs.forEach((input)=>{
+                if(input.type !== "submit")
+                    input.value = "";
+            })
+        })
+    </script>
+</body>
+
+</html>
